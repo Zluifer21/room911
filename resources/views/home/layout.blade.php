@@ -10,16 +10,43 @@
     <title>Room 911</title>
   </head>
   <body>
+    <!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+<li class="divider"></li>
+<li>
+    <a class="dropdown-item" href="{{ route('logout') }}"
+       onclick="event.preventDefault();
+                     document.getElementById('logout-form').submit();">
+        {{ __('Logout') }}
+    </a>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+</li>
+</li>
+
+</ul>
     <nav>
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Logo</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="{{ url('access_room') }}">Access Room </a></li>
-      <li><a href="collapsible.html">JavaScript</a></li>
-    </ul>
-  </div>
-</nav>
+      <div class="nav-wrapper">
+        {{ date('Y-m-d H:i:s') }}
+       <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+
+       <li><a href="{!! route('home') !!}">Home</a></li>
+       <li><a href="{!! url('access_room') !!}">Access Room</a></li>
+
+        </ul>
+        <ul class="right">
+          <!-- Dropdown Trigger -->
+          <li> <a class='dropdown-button' data-beloworigin="true" href='#' data-activates='dropdown1'>
+            @if( Auth::check() )
+            {{ Auth::user()->name }}
+            @endif
+        <i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+      </div>
+    </nav>
 
       @yield('content')
 

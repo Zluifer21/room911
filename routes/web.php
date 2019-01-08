@@ -11,8 +11,17 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::resource('employees', 'EmployeeController');
-Route::get('logs/{id}', 'LogController@index');
+
+
 Route::match(['get', 'post'],'access_room','EmployeeController@access_room');
-Route::post('filter','EmployeeController@filter');
+Auth::routes();
+
+
+Route::group(['middleware' => ['role:admin']], function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('employees', 'EmployeeController');
+    Route::get('/', 'HomeController@index');
+    Route::get('logs/{id}', 'LogController@index');
+    Route::post('filter','EmployeeController@filter');
+
+});

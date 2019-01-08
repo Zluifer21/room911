@@ -11,4 +11,14 @@ class Log extends Model
     {
        return $this->belongsTo(\App\Models\Employees::class, 'employee_id', 'id');
     }
+    public function result()
+     {
+         if ($this->success==0)
+         {
+           return 'Error';
+         }else
+         {
+           return 'Success';
+         }
+     }
 }

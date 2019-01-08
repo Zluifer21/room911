@@ -37,7 +37,8 @@ $(document).on('submit', 'form#frm_access', function (event) {
             contentType: false,
             processData: false,
             success: function (data) {
-                console.log(data.message);
+                $( "#access" ).html(data.message);
+
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log("Error: " + errorThrown);
@@ -58,7 +59,7 @@ function data_table() {
             $('#loading').hide();
         },
         error: function (xhr, status, error) {
-            alert(xhr.responseText);
+            console.log(xhr.responseText);
         }
     });
 }
@@ -113,7 +114,6 @@ $.ajax({
 type: "get",
 url: url,
 success: function (data) {
-  console.log(data);
   $( ".modal-content" ).html(data);
 },
 error: function (xhr, status, error) {
